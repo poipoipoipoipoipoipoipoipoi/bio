@@ -75,6 +75,25 @@
             border: none;
             border-bottom: solid 5px;
         }
+        .image-to-hover {
+            position: relative;
+            text-decoration: underline;
+        }
+        .image-to-hover img {
+            display: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            max-width: 50vw;
+            max-height: 50vh;
+            width: auto;
+            height: auto;
+        }
+        .image-to-hover:hover img {
+            display: block;
+            bottom: 100%;
+        }
         @media (max-width: 600px) {
             .content {
                 padding: 10px;
@@ -180,6 +199,10 @@
         <p><a href="https://hosted.weblate.org/user/Discord-Porkifiable" target="_blank">Hosted Weblate</a></p>
         <p><a href="https://namemc.com/profile/the_PIGGY_one.1" target="_blank">Minecraft name (NameMC): the_PIGGY_one</a></p>
         <p><a href="darts.exe" download target="_blank">darts.exe</a> <a href="darts.cpp" download target="_blank">darts.cpp</a></p>
+        <p><a href="me hugging.jpg" class="image-to-hover" download target="_blank">
+            me hugging
+            <img src="me hugging.jpg" alt="me hugging">
+        </a></p>
         <p><a href="https://www.whatbeatsrock.com/user/porkifiableoinkingmedium/custom" target="_blank">custom mode on "what beats rock"</a>. I'm in <a href="https://discord.gg/cDqSkABVjw" target="_blank">the Discord server for online game "what beats rock"</a> and am called "Porkifiable" in the server. <strong>This is a way you can add me as your Discord friend.</strong></p>
         <hr>
         <p>Feel free to reach out and connect with me. Whether you want to talk about something, discuss your current situation, or seek friendship, you can contact me through:</p>

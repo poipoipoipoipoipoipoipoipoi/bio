@@ -15,23 +15,27 @@
             margin: 0;
             padding: 0;
         }
+        .content {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            margin: 0px auto;
+            max-width: 100%;
+            width: 1000px;
+        }
         table {
-            width: 80%;
+            width: 100%;
             border-spacing: 10px;
-            margin: auto;
+            margin: 20px auto;
         }
-        th {
-            font-size: 1.2em;
-            color: #000;
-        }
-        td {
+        th, td {
             font-size: 1.2em;
             color: #000;
         }
         a {
-            font-size: 1.0em;
+            font-size: 1em;
             color: #000;
             text-decoration: underline;
+            word-wrap: break-word;
         }
         li {
             text-align: left;
@@ -39,12 +43,6 @@
         p {
             font-size: 1.2em;
             color: #000;
-        }
-        .content {
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 20px;
-            margin: 0px 50px;
-            display: block;
         }
         .note {
             font-weight: lighter;
@@ -54,6 +52,41 @@
         }
         th.left {
             text-align: right;
+            padding-right: 10px;
+        }
+        .qr-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px auto;
+        }
+        .qr-section img {
+            width: 40%;
+            max-width: 200px;
+            height: auto;
+            margin: 10px;
+        }
+        .qr-section p {
+            margin: 10px;
+        }
+        @media (max-width: 600px) {
+            .content {
+                padding: 10px;
+            }
+            th, td {
+                font-size: 1em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .qr-section {
+                flex-direction: column;
+            }
+            .qr-section img {
+                width: 60%;
+                margin: 10px auto;
+            }
         }
     </style>
 </head>
@@ -99,6 +132,10 @@
                 </td>
             </tr>
         </table>
+        <div class="qr-section">
+            <img src="poipoipoipoipoipoipoipoipoi.github.io.png" alt="Porkifiable page QR code linked to https://poipoipoipoipoipoipoipoipoi.github.io/bio">
+            <p>Scan the QR code to visit this page</p>
+        </div>
         <h2>Files<br><div class="note">(CC BY-ND 4.0)</div></h2>
         <table>
             <th class="above">
@@ -134,6 +171,7 @@
         <h2>Unclear or unimportant things</h2>
         <p><a href="poetic.txt" download target="_blank">poetic.txt</a></p>
         <p><a href="https://hosted.weblate.org/user/Discord-Porkifiable" target="_blank">Hosted Weblate</a></p>
+        <p><a href="https://namemc.com/profile/the_PIGGY_one.1" target="_blank">Minecraft Name (NameMC): the_PIGGY_one</a></p>
         <p><a href="darts.exe" download target="_blank">darts.exe</a> <a href="darts.cpp" download target="_blank">darts.cpp</a></p>
     </div>
 </body>

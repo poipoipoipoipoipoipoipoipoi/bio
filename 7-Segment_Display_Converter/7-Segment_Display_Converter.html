@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>7-Segment Display Converter</title>
+        <style>
+            @font-face {
+                font-family: 'fairfaxhd';
+                src: url('FairfaxHD.ttf') format('truetype');
+            }
+            body {
+                font-family: aptos, sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                padding: 20px;
+            }
+            .back-link {
+                font-size: 1.2em;
+            }
+            textarea {
+                font-size: 2em;
+                text-align: center;
+                resize: vertical;
+                width: 80%;
+                max-width: 1000px;
+                min-height: 1em;
+            }
+            .output {
+                white-space: pre;
+                word-break: keep-all;
+                font-family: 'fairfaxhd', aptos, sans-serif;
+                font-size: 2em;
+            }
+            footer {
+                margin-top: 20px;
+                font-size: 0.8em;
+            }
+        </style>
+    </head>
+    <body class="container">
+        <p><a href="../index.html" target="_blank" class="back-link">← Back</a></p>
+        <h1>7-Segment Display Converter</h1>
+        <textarea id="input" oninput="convertText()"></textarea>
+        <p class="output" id="output"></p>
+        <label for="displayOptions">Display options:</label>
+        <select id="displayOptions" onchange="applyDisplaySettings()">
+            <option value="wrap-center">Auto wrap, Center align</option>
+            <option value="wrap-left">Auto wrap, Left align</option>
+            <option value="wrap-right">Auto wrap, Right align</option>
+            <option value="nowrap-left">No wrap, Left align</option>
+        </select>
+        <footer>
+            font: Fairfax HD by Rebecca G. Bettencourt<br>
+            <a href="https://www.kreativekorp.com/charset/font/FairfaxHD/block/FF700" target="_blank">font details</a>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

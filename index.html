@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I Hate School</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         body {
             font-family: aptos, sans-serif;
@@ -112,6 +113,54 @@
                 margin: 10px auto;
             }
         }
+        #connect-with-me {
+            background-color: #f9f9f9; /* Light grey background */
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            border: 1px solid #ddd; /* Light border */
+        }
+
+        #connect-with-me form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #connect-with-me label {
+            font-size: 1em;
+            margin-bottom: 5px;
+            color: #333; /* Dark text for readability */
+        }
+
+        #connect-with-me input[type="text"],
+        #connect-with-me input[type="email"],
+        #connect-with-me textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        #connect-with-me textarea {
+            resize: vertical; /* Allow vertical resizing only */
+        }
+
+        #connect-with-me button {
+            background-color: #28231f; /* Modern blue color */
+            color: #fff; /* White text */
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        #connect-with-me button:hover {
+            background-color: #000000; /* Darker blue for hover effect */
+        }
     </style>
 </head>
 <body>
@@ -211,7 +260,28 @@
         <p><a href="https://www.whatbeatsrock.com/user/porkifiableoinkingmedium/custom" target="_blank">custom mode on "what beats rock"</a>. I'm in <a href="https://discord.gg/cDqSkABVjw" target="_blank">the Discord server for online game "what beats rock"</a> and am called "Porkifiable" in the server. <strong>This is a way you can add me as your Discord friend.</strong></p>
         <hr>
         <p><a href="https://discord.com/channels/@me" target="_blank">Discord</a> Username: Porkifiable<br>Email address: <a href="mailto:porkifiable@outlook.com">porkifiable@outlook.com</a></p>
+        <section id="connect-with-me">
+            <form action="https://api.emailjs.com/api/v1.0/email/send" method="post">
+                <label for="message">Message me. Include your contact information.</label>
+                <textarea id="message" name="message" rows="5" placeholder="Include your contact information. (Email. If you put things like Discord username here, make sure it is set to be searchable (generally, not only in-server) and it is allowed that others friend you through name search.)"></textarea>
+                <button type="submit">submit</button>
+            </form>
+        </section>
         <p>I look forward to hearing from you. <strong>If you need anything in any sense, please contact me immediately.</strong></p>
     </div>
+    <script>
+        emailjs.init("9TeE9aIdcgv6Gf6i0"); // 初始化 EmailJS
+        document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault(); // 阻止默认表单提交
+        emailjs.sendForm("service_ysfqgk9", "template_a0a41zm", this)
+            .then(function(response) {
+            console.log("Sent successfully", response);
+            alert("Message sent successfully!");
+            }, function(error) {
+            console.log("Failed to send", error);
+            alert("Failed to send message.");
+            });
+        });
+    </script>
 </body>
 </html>

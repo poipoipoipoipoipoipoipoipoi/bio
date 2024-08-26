@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-point Gradient Canvas</title>
+    <style>
+        body {
+            font-family: aptos, sans-serif;
+            background-color: #000;
+            color: #ccc;
+        }
+        .back-link {
+                font-size: 1.2em;
+        }
+        #canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <p><a href="../index.html" target="_blank" class="back-link">← Back</a></p>
+    <h1>Multi-point Gradient Canvas</h1>
+
+    <label for="canvas-width">canvas width:</label>
+    <input type="number" id="canvas-width" value="500">
+    <label for="canvas-height"> canvas height:</label>
+    <input type="number" id="canvas-height" value="300">
+    <button id="create-canvas">create canvas</button><br><br>
+
+    <label for="sigma">sigma (Gaussian blur):</label>
+    <input type="number" id="sigma" value="200" step="20"><br><br>
+
+    <label for="color-picker">add color:</label>
+    <input type="color" id="color-picker" value="#28231f">
+    <label for="influence"> influence:</label>
+    <input type="number" id="influence" value="1" step="0.1"><br><br>
+
+    <table>
+        <td><canvas id="canvas"></canvas></td>
+        <td><div id="point-list"></div><br><button id="download-image">download image</button></td>
+    </table><br>
+
+    <script src="app.js"></script>
+</body>
+</html>

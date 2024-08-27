@@ -284,6 +284,32 @@ canvas.addEventListener('wheel', (event) => {
     }
 });
 
+canvas.addEventListener('mousemove', function (e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    let isCursorInAnyPoint = false;
+
+    for (let i = 0; i < points.length; i++) {
+        const dx = x - points[i].x;
+        const dy = y - points[i].y;
+        if (Math.sqrt(dx * dx + dy * dy) < points[i].influence * 10) {
+            isCursorInAnyPoint = true;
+            break;
+        }
+    }
+
+    if (isCursorInAnyPoint) {
+        document.body.style.cursor = 'pointer';
+    } else {
+        document.body.style.cursor = 'crosshair';
+    }
+});
+
+canvas.addEventListener('mouseleave', function (e) {
+    document.body.style.cursor = 'default';
+});
+
 canvas.addEventListener('mouseup', () => {
     isDragging = false;
     draggedPointIndex = null;

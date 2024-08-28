@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is a pig in Minecraft hard or soft?</title>
+    <style>
+        body {
+            font-family: aptos, sans-serif;
+            padding: 20px;
+            background: url('interpolated_image.png') no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: local;
+            color: #fff;
+            margin: 0px;
+        }
+        #quiz-container {
+            max-width: 550px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question h3 {
+            margin: 0px;
+            font-size: 1.2em;
+        }
+        .answers {
+            list-style: none;
+            padding: 0px;
+        }
+        .answers li {
+            margin-bottom: 10px;
+        }
+        .custom-radio {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #33333399;
+            border: 2px solid #555;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .custom-radio:hover {
+            background-color: #44444499;
+        }
+        .custom-radio:hover::before {
+            box-shadow: none;
+        }
+        .custom-radio.selected {
+            background-color: #55555599;
+            border-color: #777;
+        }
+        .custom-radio input {
+            display: none;
+        }
+        .custom-radio::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #555;
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            background-color: transparent;
+            transition: box-shadow 2s ease;
+        }
+        .custom-radio.selected::before {
+            background-color: #28231f;
+            border-color: #28231f;
+            box-shadow:
+                0 0 5px rgba(40, 35, 31, 0.7),
+                0 0 10px rgba(40, 35, 31, 0.5),
+                0 0 15px rgba(40, 35, 31, 0.3),
+                0 0 20px rgba(40, 35, 31, 0.1);
+        }
+        #results {
+            margin-top: 10px;
+            display: none;
+            background: rgb(0, 0, 0, 0);
+            padding: 20px;
+            text-align: center;
+        }
+        #results h2 {
+            margin: 0px;
+        }
+        #results button {
+            margin: 5px;
+            background-color: #00000000;
+            border: 2px solid #000;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #results button:hover {
+            background-color: #28231f99;
+        }
+        #submitBtn {
+            background-color: #00000000;
+            border: 2px solid #000;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+        }
+
+        #submitBtn:hover {
+            background-color: #28231f99;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h1>Is a pig in Minecraft hard or soft?</h1>
+    <div id="questions"></div>
+    <button id="submitBtn" onclick="submitQuiz()">Submit</button>
+    <div id="results">
+        <h2>Your Answers</h2>
+        <p id="resultText"></p>
+        <button onclick="copyAnswers()">Copy</button>
+        <button onclick="shareResults('twitter')">Share on Twitter</button>
+        <button onclick="shareResults('tumblr')">Share on Tumblr</button>
+        <button onclick="shareResults('mastodon')">Share on Mastodon</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { question: "Is a pig in Minecraft hard or soft?", answers: ["hard", "soft"] },
+        { question: "Is an ice pop a type of snow cone?", answers: ["yes", "no"] },
+        { question: "Is having sex with your past self masturbation?", answers: ["yes", "no"] },
+        { question: "Is 'down' the direction of gravity or the direction towards the Earth's 'center'?", answers: ["gravity", "Earth's center"] },
+        { question: "Is water wet?", answers: ["yes", "no"] },
+        { question: "Is a rubber band a spring?", answers: ["yes", "no"] },
+        { question: "Are chips or air the main component of a bag of chips?", answers: ["chips", "air"] },
+        { question: "Are mules and hinnies the same animal?", answers: ["yes", "no"] },
+        { question: "Is a remote control a keyboard?", answers: ["yes", "no"] },
+        { question: "Is a paperclip a machine?", answers: ["yes", "no"] },
+        { question: "Is a fish tank with plants a flower pot?", answers: ["yes", "no"] },
+        { question: "Is bamboo a tree?", answers: ["yes", "no"] },
+        { question: "Does a vacuum exist?", answers: ["yes", "no"] },
+        { question: "Is a laptop's power adapter a charger?", answers: ["yes", "no"] },
+        { question: "Is a reservoir used for pumped-storage hydroelectricity a battery?", answers: ["yes", "no"] },
+        { question: "Is a jet engine a fan?", answers: ["yes", "no"] },
+        { question: "Is a body pillow a stuffed toy?", answers: ["yes", "no"] },
+        { question: "Is a decibel a real unit of measurement?", answers: ["yes", "no"] },
+        { question: "Is rubber plastic?", answers: ["yes", "no"] },
+        { question: "Is a coconut a nut?", answers: ["yes", "no"] },
+        { question: "Is ice in Antarctic mineral?", answers: ["yes", "no"] },
+        { question: "Is binary 'base-2' or 'base-10'?", answers: ["base-2", "base-10"] },
+        { question: "Is the feeling of hunger a sense of touch?", answers: ["yes", "no"] },
+        { question: "When measuring the volume of beans, is the air between them included?", answers: ["yes", "no"] },
+        { question: "Are mushroom-shaped popcorn and butterfly-shaped popcorn the same food?", answers: ["yes", "no"] },
+        { question: "Is a fryer basket a sieve?", answers: ["yes", "no"] },
+        { question: "Is a balloon directly above the South Pole further south than the South Pole?", answers: ["yes", "no"] },
+        { question: "Are the items in a dropdown menu buttons?", answers: ["yes", "no"] },
+        { question: "Is a computer screen a lamp?", answers: ["yes", "no"] },
+        { question: "Would light-year of mercury be a unit of pressure?", answers: ["yes", "no"] },
+        { question: "Is monochromatic cyan light and cyan light made from monochromatic green and blue the same light?", answers: ["yes", "no"] },
+        { question: "Is a tin box a tin can?", answers: ["yes", "no"] },
+        { question: "Is the inside of a hot dog a type of spam?", answers: ["yes", "no"] },
+        { question: "Is a bottle opener a wrench?", answers: ["yes", "no"] },
+        { question: "Is sweetened milk powder a type of candy?", answers: ["yes", "no"] },
+        { question: "If a mandarin is difficult to peel and cannot be separated into segments, is it an orange?", answers: ["yes", "no"] },
+        { question: "Is a yoga ball furniture?", answers: ["yes", "no"] },
+        { question: "Is a window screen a sieve?", answers: ["yes", "no"] },
+        { question: "Is an axe a knife?", answers: ["yes", "no"] },
+        { question: "Is white chocolate cooking oil?", answers: ["yes", "no"] },
+        { question: "Is a chocolate fountain a deep fryer?", answers: ["yes", "no"] },
+        { question: "Is a drone fans?", answers: ["yes", "no"] },
+        { question: "Is sugar water cane juice?", answers: ["yes", "no"] }
+    ];
+
+    function loadQuestions() {
+        const questionsContainer = document.getElementById('questions');
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <h3>${q.question}</h3>
+                <ul class="answers">
+                    ${q.answers.map(answer => `
+                        <li class="custom-radio">
+                            <label>
+                                <input type="radio" name="question${index}" value="${answer}">
+                                ${answer}
+                            </label>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            questionsContainer.appendChild(questionDiv);
+        });
+
+        // Add event listeners for custom radio buttons
+        document.querySelectorAll('.custom-radio').forEach(radio => {
+            radio.addEventListener('click', function () {
+                const input = this.querySelector('input');
+                const isSelected = this.classList.contains('selected');
+                document.querySelectorAll(`input[name="question${input.name.match(/\d+/)[0]}"]`).forEach(r => r.parentNode.parentNode.classList.remove('selected'));
+
+                if (isSelected) {
+                    this.classList.remove('selected');
+                    input.checked = false;
+                } else {
+                    this.classList.add('selected');
+                    input.checked = true;
+                }
+            });
+        });
+    }
+
+    function copyAnswers() {
+        const resultText = document.getElementById('resultText').innerText;
+        navigator.clipboard.writeText(resultText).then(() => {
+            alert("Copied.");
+        }).catch(err => {
+            alert("Error: " + err);
+        });
+    }
+
+    function submitQuiz() {
+        const selectedAnswers = [];
+        questions.forEach((_, index) => {
+            const selected = document.querySelector(`input[name="question${index}"]:checked`);
+            if (selected) {
+                selectedAnswers.push({ question: questions[index].question, answer: selected.value });
+            }
+        });
+
+        // Generate results
+        const resultText = selectedAnswers.map(a => `${a.question} - ${a.answer}`).join('\n');
+        document.getElementById('resultText').innerText = resultText;
+        document.getElementById('results').style.display = 'block';
+    }
+
+    function shareResults(platform) {
+        const resultText = document.getElementById('resultText').innerText;
+        let shareUrl = "";
+        let text = encodeURIComponent(`I just took a quiz (${window.location.href})! Here are my answers:\n${resultText}`);
+        let textAlt = encodeURIComponent(`I just took a quiz! Here are my answers:\n${resultText}`);
+
+        switch (platform) {
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${text}`;
+                break;
+            case 'tumblr':
+                let formattedText = textAlt.replace(/%0A/g, ' | ');
+                shareUrl = `https://www.tumblr.com/widgets/share/tool?posttype=link&caption=${formattedText}&content=${window.location.href}&canonicalUrl=https://www.tumblr.com/&shareSource=tumblr_share_button&tags=quiz,fun`;
+                break;
+            case 'mastodon':
+                shareUrl = `https://mastodon.social/share?text=${text}`;
+                break;
+            default:
+                alert("Unsupported platform!");
+                return;
+        }
+
+        window.open(shareUrl, '_blank');
+    }
+
+    loadQuestions();
+</script>
+
+</body>
+</html>

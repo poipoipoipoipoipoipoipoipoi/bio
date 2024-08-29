@@ -225,7 +225,7 @@
     }
 
     function copyAnswers() {
-        const resultText = document.getElementById('resultText').innerText;
+        const resultText = document.getElementById('resultText').innerText + `\n(${window.location.href})`;
         navigator.clipboard.writeText(resultText).then(() => {
             alert("Copied.");
         }).catch(err => {

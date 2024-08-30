@@ -18,7 +18,7 @@
     <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea><br>
     <input type="checkbox" id="splitLigatures" checked><label for="splitLigatures"> split ligatures</label><br>
     <input type="checkbox" id="splitDigraphs" checked><label for="splitDigraphs"> split digraphs</label><br>
-    <input type="checkbox" id="replaceEt"><label for="replaceEt"> replace '&' with 'and'</label><br>
+    <input type="checkbox" id="replaceEt"><label for="replaceEt"> replace '&' with ' and '</label><br>
 
     <!-- Corrected fieldset with radio buttons for Roman numeral options -->
     <fieldset>
@@ -80,7 +80,7 @@
         }
             // Define ligatures and digraphs to split
             const et = {
-                '&': 'and'
+                '&': ' and '
             }
             // Ligatures
             const ligatures = {

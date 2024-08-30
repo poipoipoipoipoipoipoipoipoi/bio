@@ -78,6 +78,9 @@
             document.getElementById("outputText").value = text;
         }
             // Define ligatures and digraphs to split
+            const et = {
+                '&': 'and'
+            }
             // Ligatures
             const ligatures = {
                 'Ꜳ': 'AA',

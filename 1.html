@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unicode Ligature and Digraph Splitter</title>
     <style>
-        body { font-family: aptos, sans-serif; margin: 20px; text-align: center; display: block; }
+        body { font-family: aptos, sans-serif; margin: 20px; text-align: center; display: inline-block; }
         textarea, button { width: 80%; }
         textarea { font-size: 1.2em; }
         .result { font-size: 1.2em; margin-top: 20px; padding: 10px; }
@@ -14,15 +14,22 @@
 <body>
     <h1>Unicode Ligature and Digraph Splitter</h1>
     <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea>
-    <input type="checkbox" id="splitLigatures" checked><label>split ligatures</label><br>
-    <input type="checkbox" id="splitDigraphs" checked><label>split digraphs</label><br>
-    <field>
+    <input type="checkbox" id="splitLigatures" checked><label for="splitLigatures"> split ligatures</label><br>
+    <input type="checkbox" id="splitDigraphs" checked><label for="splitDigraphs"> split digraphs</label><br>
+
+    <!-- Corrected fieldset with radio buttons for Roman numeral options -->
+    <fieldset>
         <legend>Roman numerals</legend>
-        <input type="radio" id="notSplitRomanNumerals"><label>skip</label>
-        <input type="radio" id="onlySplitRomanNumerals"><label>only split</label>
-        <input type="radio" id="normalizeRomanNumerals" checked><label>splitted casual letters</label>
-    </field>
-        <button onclick="splitText()">split</button>
+        <input type="radio" id="notSplitRomanNumerals" name="romanNumeralsOption" value="none" checked>
+        <label for="notSplitRomanNumerals">skip</label><br>
+        <input type="radio" id="onlySplitRomanNumerals" name="romanNumeralsOption" value="split">
+        <label for="onlySplitRomanNumerals">only split</label><br>
+        <input type="radio" id="normalizeRomanNumerals" name="romanNumeralsOption" value="normalize">
+        <label for="normalizeRomanNumerals">split to casual letters</label>
+    </fieldset>
+    
+    <button onclick="splitText()">split</button>
+    
     <div class="result">
         <textarea id="outputText" rows="6" readonly></textarea>
     </div>
@@ -32,9 +39,33 @@
             let text = document.getElementById("inputText").value;
             let splitLigatures = document.getElementById("splitLigatures").checked;
             let splitDigraphs = document.getElementById("splitDigraphs").checked;
-            let splitRomanNumeralsOnlySplit = document.getElementById("onlySplitRomanNumerals").checked;
-            let splitRomanNumeralsCasually = document.getElementById("normalizeRomanNumerals").checked;
+            let romanNumeralsOption = document.querySelector('input[name="romanNumeralsOption"]:checked').value;
 
+            // Process the text based on user selections
+            if (splitLigatures) {
+                for (let lig in ligatures) {
+                    text = text.split(lig).join(ligatures[lig]);
+                }
+            }
+
+            if (splitDigraphs) {
+                for (let dig in digraphs) {
+                    text = text.split(dig).join(digraphs[dig]);
+                }
+            }
+
+            if (romanNumeralsOption === "split") {
+                for (let roman in romanNumeralsOnlySplit) {
+                    text = text.split(roman).join(romanNumeralsOnlySplit[roman]);
+                }
+            } else if (romanNumeralsOption === "normalize") {
+                for (let roman in romanNumeralsNormalization) {
+                    text = text.split(roman).join(romanNumeralsNormalization[roman]);
+                }
+            }
+
+            document.getElementById("outputText").value = text;
+        }
             // Define ligatures and digraphs to split
             // Ligatures
             const ligatures = {
@@ -161,30 +192,6 @@
                 'ⅿ': 'm',
             }
 
-            if (splitLigatures) {
-                for (const [key, value] of Object.entries(ligatures)) {
-                    text = text.split(key).join(value);
-                }
-            }
-
-            if (splitDigraphs) {
-                for (const [key, value] of Object.entries(digraphs)) {
-                    text = text.split(key).join(value);
-                }
-            }
-
-            if (splitRomanNumeralsOnlySplit) {
-                for (const [key, value] of Object.entries(romanNumeralsNormalization)) {
-                    text = text.split(key).join(value);
-            }
-
-            if (splitRomanNumeralsCasually) {
-                for (const [key, value] of Object.entries(romanNumeralsOnlySplit)) {
-                    text = text.split(key).join(value);
-            }
-
-            document.getElementById("outputText").value = text;
-        }
     </script>
 </body>
 </html>

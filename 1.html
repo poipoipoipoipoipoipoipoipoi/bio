@@ -12,12 +12,17 @@
     </style>
 </head>
 <body>
-    <h1>Unicode Ligature & Digraph Splitter</h1>
+    <h1>Unicode Ligature and Digraph Splitter</h1>
     <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea>
-    <label><input type="checkbox" id="splitLigatures" checked>split ligatures</label><br>
-    <label><input type="checkbox" id="splitDigraphs" checked>split digraphs</label><br>
-    <label><input type="radio" id=</label>
-    <button onclick="splitText()">split</button>
+    <input type="checkbox" id="splitLigatures" checked><label>split ligatures</label><br>
+    <input type="checkbox" id="splitDigraphs" checked><label>split digraphs</label><br>
+    <field>
+        <legend>Roman numerals</legend>
+        <input type="radio" id="notSplitRomanNumerals"><label>skip</label>
+        <input type="radio" id="onlySplitRomanNumerals"><label>only split</label>
+        <input type="radio" id="normalizeRomanNumerals" checked><label>splitted casual letters</label>
+    </field>
+        <button onclick="splitText()">split</button>
     <div class="result">
         <textarea id="outputText" rows="6" readonly></textarea>
     </div>
@@ -27,6 +32,8 @@
             let text = document.getElementById("inputText").value;
             let splitLigatures = document.getElementById("splitLigatures").checked;
             let splitDigraphs = document.getElementById("splitDigraphs").checked;
+            let splitRomanNumeralsOnlySplit = document.getElementById("onlySplitRomanNumerals").checked;
+            let splitRomanNumeralsCasually = document.getElementById("normalizeRomanNumerals").checked;
 
             // Define ligatures and digraphs to split
             // Ligatures
@@ -166,14 +173,14 @@
                 }
             }
 
-            // Normalize Roman numerals (if enabled)
-            for (const [key, value] of Object.entries(romanNumeralsNormalization)) {
-                text = text.split(key).join(value);
+            if (splitRomanNumeralsOnlySplit) {
+                for (const [key, value] of Object.entries(romanNumeralsNormalization)) {
+                    text = text.split(key).join(value);
             }
 
-            // Only split certain Roman numerals (if enabled)
-            for (const [key, value] of Object.entries(romanNumeralsOnlySplit)) {
-                text = text.split(key).join(value);
+            if (splitRomanNumeralsCasually) {
+                for (const [key, value] of Object.entries(romanNumeralsOnlySplit)) {
+                    text = text.split(key).join(value);
             }
 
             document.getElementById("outputText").value = text;

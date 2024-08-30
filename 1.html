@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode Ligature and Digraph Splitter</title>
+    <style>
+        body { font-family: aptos, sans-serif; margin: 20px; text-align: center; }
+        textarea, button { width: 80%; }
+        textarea { font-size: 1.2em; }
+        .result { font-size: 1.2em; margin-top: 20px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Unicode Ligature & Digraph Splitter</h1>
+    <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea>
+    <label><input type="checkbox" id="splitLigatures" checked>split ligatures</label><br>
+    <label><input type="checkbox" id="splitDigraphs" checked>split digraphs</label><br>
+    <label><input type="radio" id=</label>
+    <button onclick="splitText()">split</button>
+    <div class="result">
+        <textarea id="outputText" rows="6" readonly></textarea>
+    </div>
+
+    <script>
+        function splitText() {
+            let text = document.getElementById("inputText").value;
+            let splitLigatures = document.getElementById("splitLigatures").checked;
+            let splitDigraphs = document.getElementById("splitDigraphs").checked;
+
+            // Define ligatures and digraphs to split
+            // Ligatures
+            const ligatures = {
+                'Ꜳ': 'AA',
+                'ꜳ': 'aa',
+                'Æ': 'AE',
+                'æ': 'ae',
+                'Ꜵ': 'AO',
+                'ꜵ': 'ao',
+                'Ꜷ': 'AU',
+                'ꜷ': 'au',
+                'Ꜹ': 'AV',
+                'ꜹ': 'av',
+                'Ꜻ': 'AV',
+                'ꜻ': 'av',
+                'Ꜽ': 'AY',
+                'ꜽ': 'ay',
+                '🙰': 'et',
+                'ﬀ': 'ff',
+                'ﬃ': 'ffi',
+                'ﬄ': 'ffl',
+                'ﬁ': 'fi',
+                'ﬂ': 'fl',
+                'Ƕ': 'Hv',
+                'ƕ': 'hv',
+                '℔': 'lb',
+                'Ỻ': 'lL',
+                'ỻ': 'll',
+                'Œ': 'OE',
+                'œ': 'oe',
+                'Ꝏ': 'OO',
+                'ꝏ': 'oo',
+                'ꭢ': 'ɔe',
+                'ẞ': 'ſs',
+                'ß': 'ſz',
+                'ﬆ': 'st',
+                'ﬅ': 'ſt',
+                'Ꜩ': 'TZ',
+                'ꜩ': 'tz',
+                'ᵫ': 'ue',
+                'ꭣ': 'uo',
+                'W': 'VV',
+                'w': 'vv',
+                'Ꝡ': 'VY',
+                'ꝡ': 'vy',
+                'Ꟗ': 'ſs',
+                'ꟗ': 'ſs',
+                'ꟕ': 'ƿƿ',
+                'ꟓ': 'þþ'
+            };
+
+            // Digraphs
+            const digraphs = {
+                'Ǳ': 'DZ',
+                'ǲ': 'Dz',
+                'ǳ': 'dz',
+                'Ǆ': 'DŽ',
+                'ǅ': 'Dž',
+                'ǆ': 'dž',
+                'Ĳ': 'IJ',
+                'ĳ': 'ij',
+                'Ǉ': 'LJ',
+                'ǈ': 'Lj',
+                'ǉ': 'lj',
+                'Ǌ': 'NJ',
+                'ǋ': 'Nj',
+                'ǌ': 'nj',
+                'ᵺ': 'th'
+            };
+
+            //Roman numerals
+            const romanNumeralsOnlySplit = {
+                'Ⅱ': 'ⅠⅠ',
+                'Ⅲ': 'ⅠⅠⅠ',
+                'Ⅳ': 'ⅠⅤ',
+                'Ⅵ': 'ⅤⅠ',
+                'Ⅶ': 'ⅤⅠⅠ',
+                'Ⅷ': 'ⅤⅠⅠⅠ',
+                'Ⅸ': 'ⅠⅩ',
+                'Ⅺ': 'ⅩⅠ',
+                'Ⅻ': 'ⅩⅠⅠ',
+                'ⅱ': 'ⅰⅰ',
+                'ⅲ': 'ⅰⅰⅰ',
+                'ⅳ': 'ⅰⅴ',
+                'ⅵ': 'ⅴⅰ',
+                'ⅶ': 'ⅴⅰⅰ',
+                'ⅷ': 'ⅴⅰⅰⅰ',
+                'ⅸ': 'ⅰⅹ',
+                'ⅺ': 'ⅹⅰ',
+                'ⅻ': 'ⅹⅰⅰ',
+            }
+            const romanNumeralsNormalization = {
+                'Ⅰ': 'I',
+                'Ⅱ': 'II',
+                'Ⅲ': 'III',
+                'Ⅳ': 'IV',
+                'Ⅴ': 'V',
+                'Ⅵ': 'VI',
+                'Ⅶ': 'VII',
+                'Ⅷ': 'VIII',
+                'Ⅸ': 'IX',
+                'Ⅹ': 'X',
+                'Ⅺ': 'XI',
+                'Ⅻ': 'XII',
+                'Ⅼ': 'L',
+                'Ⅽ': 'C',
+                'Ⅾ': 'D',
+                'Ⅿ': 'M',
+                'ⅰ': 'i',
+                'ⅱ': 'ii',
+                'ⅲ': 'iii',
+                'ⅳ': 'iv',
+                'ⅴ': 'v',
+                'ⅵ': 'vi',
+                'ⅶ': 'vii',
+                'ⅷ': 'viii',
+                'ⅸ': 'ix',
+                'ⅹ': 'x',
+                'ⅺ': 'xi',
+                'ⅻ': 'xii',
+                'ⅼ': 'l',
+                'ⅽ': 'c',
+                'ⅾ': 'd',
+                'ⅿ': 'm',
+            }
+
+            if (splitLigatures) {
+                for (const [key, value] of Object.entries(ligatures)) {
+                    text = text.split(key).join(value);
+                }
+            }
+
+            if (splitDigraphs) {
+                for (const [key, value] of Object.entries(digraphs)) {
+                    text = text.split(key).join(value);
+                }
+            }
+
+            // Normalize Roman numerals (if enabled)
+            for (const [key, value] of Object.entries(romanNumeralsNormalization)) {
+                text = text.split(key).join(value);
+            }
+
+            // Only split certain Roman numerals (if enabled)
+            for (const [key, value] of Object.entries(romanNumeralsOnlySplit)) {
+                text = text.split(key).join(value);
+            }
+
+            document.getElementById("outputText").value = text;
+        }
+    </script>
+</body>
+</html>

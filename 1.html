@@ -7,13 +7,14 @@
     <style>
         body { font-family: aptos, sans-serif; margin: 20px; text-align: center; display: inline-block; }
         textarea, button { width: 80%; }
-        textarea { font-size: 1.2em; }
-        .result { font-size: 1.2em; margin-top: 20px; padding: 10px; }
+        textarea { font-size: 1.2em; margin-top: 20px; }
+        button { margin-top: 20px; }
+        .result { font-size: 1.2em; margin-top: 20px; }
     </style>
 </head>
 <body>
     <h1>Unicode Ligature and Digraph Splitter</h1>
-    <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea>
+    <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea><br>
     <input type="checkbox" id="splitLigatures" checked><label for="splitLigatures"> split ligatures</label><br>
     <input type="checkbox" id="splitDigraphs" checked><label for="splitDigraphs"> split digraphs</label><br>
 
@@ -21,9 +22,9 @@
     <fieldset>
         <legend>Roman numerals</legend>
         <input type="radio" id="notSplitRomanNumerals" name="romanNumeralsOption" value="none" checked>
-        <label for="notSplitRomanNumerals">skip</label><br>
+        <label for="notSplitRomanNumerals">skip</label>
         <input type="radio" id="onlySplitRomanNumerals" name="romanNumeralsOption" value="split">
-        <label for="onlySplitRomanNumerals">only split</label><br>
+        <label for="onlySplitRomanNumerals">only split</label>
         <input type="radio" id="normalizeRomanNumerals" name="romanNumeralsOption" value="normalize">
         <label for="normalizeRomanNumerals">split to casual letters</label>
     </fieldset>

@@ -18,6 +18,7 @@
     <textarea id="inputText" rows="6" placeholder="Porkiﬁable"></textarea><br>
     <input type="checkbox" id="splitLigatures" checked><label for="splitLigatures"> split ligatures</label><br>
     <input type="checkbox" id="splitDigraphs" checked><label for="splitDigraphs"> split digraphs</label><br>
+    <input type="checkbox" id="replaceEt" checked><label for="replaceEt"> replace '&' with 'and'</label><br>
 
     <!-- Corrected fieldset with radio buttons for Roman numeral options -->
     <fieldset>
@@ -36,6 +37,8 @@
         <textarea id="outputText" rows="6" readonly></textarea>
     </div>
 
+    <p><a href="../Symbol_Degenerater/index.html" target="_blank">symbol degenerater</a></p>
+
     <script>
         function splitText() {
             let text = document.getElementById("inputText").value;
@@ -53,6 +56,12 @@
             if (splitDigraphs) {
                 for (let dig in digraphs) {
                     text = text.split(dig).join(digraphs[dig]);
+                }
+            }
+
+            if (replaceEt) {
+                for (let dig in et) {
+                    text = text.split(dig).join(et[dig]);
                 }
             }
 

@@ -3,7 +3,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colorPicker = document.getElementById('color-picker');
 const influenceInput = document.getElementById('influence');
-const sigmaInput = document.getElementById('sigma');
+const sigmaLInput = document.getElementById('sigmaL');
+const sigmaHInput = document.getElementById('sigmaH');
 const downloadButton = document.getElementById('download-image');
 const createCanvasButton = document.getElementById('create-canvas');
 const pointList = document.getElementById('point-list');
@@ -11,7 +12,8 @@ const pointList = document.getElementById('point-list');
 let points = [];
 let canvasWidth = 500;
 let canvasHeight = 300;
-let sigma = parseFloat(sigmaInput.value);
+let sigmaL = parseFloat(sigmaLInput.value);
+let sigmaH = parseFloat(sigmaHInput.value);
 
 // Set initial canvas size
 canvas.width = canvasWidth;
@@ -77,25 +79,13 @@ function hexToOklab(hex) {
     const gLinear = g <= 0.04045 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
     const bLinear = b <= 0.04045 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
 
-    const RGB_TO_XYZ = [
-        [0.4124564, 0.3575761, 0.1804375],
-        [0.2126729, 0.7151522, 0.0721750],
-        [0.0193339, 0.1191920, 0.9503041]
-    ];
+    const x = rLinear * 0.4124564 + gLinear * 0.3575761 + bLinear * 0.1804375;
+    const y = rLinear * 0.2126729 + gLinear * 0.7151522 + bLinear * 0.0721750;
+    const z = rLinear * 0.0193339 + gLinear * 0.1191920 + bLinear * 0.9503041;
 
-    const x = rLinear * RGB_TO_XYZ[0][0] + gLinear * RGB_TO_XYZ[0][1] + bLinear * RGB_TO_XYZ[0][2];
-    const y = rLinear * RGB_TO_XYZ[1][0] + gLinear * RGB_TO_XYZ[1][1] + bLinear * RGB_TO_XYZ[1][2];
-    const z = rLinear * RGB_TO_XYZ[2][0] + gLinear * RGB_TO_XYZ[2][1] + bLinear * RGB_TO_XYZ[2][2];
-
-    const LMS_TO_XYZ = [
-        [0.4002, 0.7075, -0.0808],
-        [-0.2263, 1.1653,  0.0457],
-        [0.0000, 0.0000,  0.9182]
-    ];
-
-    const l_ = x * LMS_TO_XYZ[0][0] + y * LMS_TO_XYZ[0][1] + z * LMS_TO_XYZ[0][2];
-    const m = x * LMS_TO_XYZ[1][0] + y * LMS_TO_XYZ[1][1] + z * LMS_TO_XYZ[1][2];
-    const s = x * LMS_TO_XYZ[2][0] + y * LMS_TO_XYZ[2][1] + z * LMS_TO_XYZ[2][2];
+    const l_ = x * 0.4002 + y * 0.7075 + z * -0.0808;
+    const m = x * -0.2263 + y * 1.1653 + z * 0.0457;
+    const s = z * 0.9182;
 
     const l__ = Math.pow(l_, 1 / 3);
     const m_ = Math.pow(m, 1 / 3);
@@ -152,26 +142,29 @@ function draw(showPoints = true) {
         for (let j = 0; j < canvas.height; j++) {
             const x = i;
             const y = j;
-            let l = 0, a = 0, b_oklab = 0, weightSum = 0;
+            let l = 0, a = 0, b_oklab = 0, weightLSum = 0; weightHSum = 0;
 
             points.forEach(point => {
                 const dx = x - point.x;
                 const dy = y - point.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                const influenceSigma = sigma * point.influence;
-                const weight = Math.exp(-distance * distance / (2 * influenceSigma * influenceSigma));
+                const influenceSigmaL = sigmaL * point.influence;
+                const influenceSigmaH = sigmaH * point.influence;
+                const weightL = Math.exp(-distance * distance / (2 * influenceSigmaL * influenceSigmaL));
+                const weightH = Math.exp(-distance * distance / (2 * influenceSigmaH * influenceSigmaH));
 
                 const color = hexToOklab(point.color);
-                l += color.l * weight;
-                a += color.a * weight;
-                b_oklab += color.b_oklab * weight;
-                weightSum += weight;
+                l += color.l * weightL;
+                a += color.a * weightH;
+                b_oklab += color.b_oklab * weightH;
+                weightLSum += weightL;
+                weightHSum += weightH;
             });
 
             // Normalize weights
-            l = weightSum ? l / weightSum : 0;
-            a = weightSum ? a / weightSum : 0;
-            b_oklab = weightSum ? b_oklab / weightSum : 0;
+            l = weightLSum ? l / weightLSum : 0;
+            a = weightHSum ? a / weightHSum : 0;
+            b_oklab = weightHSum ? b_oklab / weightHSum : 0;
 
             const rgb = oklabToRgb({ l, a, b_oklab });
             const index = (y * canvas.width + x) * 4;
@@ -346,8 +339,13 @@ influenceInput.addEventListener('input', () => {
     }
 });
 
-sigmaInput.addEventListener('input', () => {
-    sigma = parseFloat(sigmaInput.value);
+sigmaLInput.addEventListener('input', () => {
+    sigmaL = parseFloat(sigmaLInput.value);
+    draw();
+});
+
+sigmaHInput.addEventListener('input', () => {
+    sigmaH = parseFloat(sigmaHInput.value);
     draw();
 });
 

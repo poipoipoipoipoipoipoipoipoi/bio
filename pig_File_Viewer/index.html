@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.pig File Viewer</title>
+    <style>
+        body {
+            font-family: aptos, sans-serif;
+            margin: 20px;
+        }
+        .file-content {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+        audio {
+            display: block;
+            margin: 10px 0;
+        }
+        .download-link {
+            display: block;
+            margin: 10px 0;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>.pig File Viewer</h1>
+<input type="file" id="pigFileInput" accept=".pig" />
+<div id="fileContent" class="file-content"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<script>
+document.getElementById('pigFileInput').addEventListener('change', async function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+        // Unzip .pig (which is just a .zip)
+        const zip = await JSZip.loadAsync(file);
+
+        // Find and parse pig.oink
+        const pigOink = await zip.file("pig.oink").async("string");
+
+        const fileContentDiv = document.getElementById('fileContent');
+        fileContentDiv.innerHTML = ""; // Clear previous content
+
+        const lines = pigOink.split("\n");
+
+        let currentAnnotation = "";
+
+        for (let line of lines) {
+            line = line.trim(); // Ensure no extra spaces
+
+            if (line.startsWith("`") && line.endsWith("`")) {
+                const files = line.slice(1, -1).split("``").map(file => file.trim());
+                for (let fileName of files) {
+                    if (!fileName) continue; // Skip empty file names
+
+                    try {
+                        let fileContent;
+                        const fileExtension = fileName.split('.').pop().toLowerCase();
+
+                        if (zip.file(fileName)) {
+                            if (["png", "jpg", "jpeg", "gif"].includes(fileExtension)) {
+                                fileContent = await zip.file(fileName).async("blob");
+                                const imgURL = URL.createObjectURL(fileContent);
+                                fileContentDiv.innerHTML += `<p>${currentAnnotation}</p><img src="${imgURL}" alt="${fileName}">`;
+                            } else if (fileExtension === "txt") {
+                                fileContent = await zip.file(fileName).async("string");
+                                const escapedContent = fileContent.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                fileContentDiv.innerHTML += `<p>${currentAnnotation}</p><pre>${escapedContent}</pre>`;
+                            } else if (["m4a", "mp3"].includes(fileExtension)) {
+                                fileContent = await zip.file(fileName).async("blob");
+                                const audioURL = URL.createObjectURL(fileContent);
+                                fileContentDiv.innerHTML += `<p>${currentAnnotation}</p><audio controls src="${audioURL}"></audio>`;
+                            } else {
+                                fileContent = await zip.file(fileName).async("blob");
+                                const downloadURL = URL.createObjectURL(fileContent);
+                                fileContentDiv.innerHTML += `<p>${currentAnnotation}</p><a href="${downloadURL}" download="${fileName}" class="download-link">${fileName}</a>`;
+                            }
+                        } else {
+                            fileContentDiv.innerHTML += `<p>${currentAnnotation}</p>`;
+                        }
+                    } catch (error) {
+                        fileContentDiv.innerHTML += `<p class="error">error loading file: ${fileName}</p>`;
+                        console.error(error);
+                    }
+                    currentAnnotation = "";
+                }
+            } else {
+                currentAnnotation += (currentAnnotation ? "\n" : "") + line;
+            }
+        }
+
+        if (currentAnnotation.trim() !== "") {
+            fileContentDiv.innerHTML += `<p>${currentAnnotation}</p>`;
+        }
+    } catch (error) {
+        document.getElementById('fileContent').innerHTML = `<p class="error">an error occurred: ${error.message}</p>`;
+    }
+});
+</script>
+
+</body>
+</html>

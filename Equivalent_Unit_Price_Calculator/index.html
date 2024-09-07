@@ -15,6 +15,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
         }
         table, th, td {
             border: 1px solid black;
@@ -22,6 +23,13 @@
         th, td {
             padding: 8px;
             text-align: center;
+            overflow-wrap: break-word;
+        }
+        th {
+            white-space: normal;
+        }
+        input {
+            width: 90%;
         }
         .highlight-lowest {
             background-color: #d4edda;
@@ -40,7 +48,7 @@
     <table id="productTable">
         <thead>
             <tr>
-                <th>Product Number</th>
+                <th>Product</th>
                 <th>Price (Currency Unit)</th>
                 <th>Net Content (Content Unit)</th>
                 <th>Quality and Waste Factor</th>
@@ -50,11 +58,11 @@
         </thead>
         <tbody id="productBody">
             <tr id="row1">
-                <td><input type="number" id="productNumber1"></td>
+                <td><input id="productNumber1" value="thingy"></td>
                 <td><input type="number" id="price1" step="0.01"></td>
                 <td><input type="number" id="netContent1" step="0.01"></td>
-                <td><input type="number" id="qualityFactor1" step="0.01"></td>
-                <td><input type="number" id="infoValue1" step="0.01"></td>
+                <td><input type="number" id="qualityFactor1" step="0.01" value="1"></td>
+                <td><input type="number" id="infoValue1" step="0.01" value="0"></td>
                 <td id="unitPrice1"></td>
             </tr>
         </tbody>
@@ -73,11 +81,11 @@
             newRow.id = `row${rowCount}`;
 
             newRow.innerHTML = `
-                <td><input type="number" id="productNumber${rowCount}"></td>
+                <td><input id="productNumber${rowCount}" value="thingy ${rowCount}"></td>
                 <td><input type="number" id="price${rowCount}" step="0.01"></td>
                 <td><input type="number" id="netContent${rowCount}" step="0.01"></td>
-                <td><input type="number" id="qualityFactor${rowCount}" step="0.01"></td>
-                <td><input type="number" id="infoValue${rowCount}" step="0.01"></td>
+                <td><input type="number" id="qualityFactor${rowCount}" step="0.01" value="1"></td>
+                <td><input type="number" id="infoValue${rowCount}" step="0.01" value="0"></td>
                 <td id="unitPrice${rowCount}"></td>
             `;
 

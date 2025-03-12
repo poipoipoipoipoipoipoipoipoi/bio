@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Block Guessing</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        p.back-link_box { text-align: left; }
+        .back-link {
+            font-size: 1.2em;
+        }
+        #game-container { margin-top: 20px; }
+        img.pixelated { 
+            width: 200px; 
+            height: 200px; 
+            image-rendering: pixelated; /* 让像素保持清晰 */
+        }
+        #guess-input { width: 200px; padding: 5px; }
+        #hint-text { margin-top: 10px; font-style: italic; }
+        #solution { display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <p class="back-link_box"><a href="../index.html" target="_blank" class="back-link">← pig</a></p>
+    <h1>Minecraft Block Guessing</h1>
+    <div id="game-container">
+        <p>Guess the block from the image below:</p>
+        <img id="block-image" class="pixelated" src="placeholder.webp" alt="Block Texture">
+        <br>
+        <input id="guess-input" type="text" list="blocks" placeholder="Type block name...">
+        <datalist id="blocks"></datalist>
+        <button onclick="checkGuess()">Guess</button>
+        <button onclick="getHint(1)">Hint: Text</button>
+        <button onclick="getHint(2)">Hint: Larger Image</button>
+        <button onclick="giveUp()">Give Up</button>
+        <p id="hint-text"></p>
+        <div id="solution">
+            <p>Correct answer: <span id="block-name"></span></p>
+            <img id="full-image" class="pixelated" src="placeholder.webp" alt="Full Texture">
+        </div>
+    </div>
+
+    <script>
+        const blocksData = {
+            "Stone": {
+                name: "Stone",
+                smallImage: "blocks/stone_2x2.webp",
+                largeImage: "blocks/stone_4x4.webp",
+                fullImage: "blocks/stone_16x16.webp",
+                hint: "A common block found underground."
+            },
+            "Dirt": {
+                name: "Dirt",
+                smallImage: "blocks/dirt_2x2.webp",
+                largeImage: "blocks/dirt_4x4.webp",
+                fullImage: "blocks/dirt_16x16.webp",
+                hint: "A soft block often covered by grass."
+            }
+        };
+
+        let selectedBlock = null;
+        function startGame() {
+            const blockKeys = Object.keys(blocksData);
+            selectedBlock = blocksData[blockKeys[Math.floor(Math.random() * blockKeys.length)]];
+            document.getElementById("block-image").src = selectedBlock.smallImage;
+            document.getElementById("solution").style.display = "none";
+            document.getElementById("hint-text").innerText = "";
+            document.getElementById("guess-input").value = "";
+        }
+        window.onload = startGame;
+
+        function checkGuess() {
+            const guess = document.getElementById("guess-input").value.trim();
+            if (guess.toLowerCase() === selectedBlock.name.toLowerCase()) {
+                alert("Correct! It's " + selectedBlock.name);
+                giveUp();
+            } else {
+                alert("Wrong guess, try again!");
+            }
+            document.getElementById("guess-input").value = "";
+        }
+
+        function getHint(type) {
+            if (!selectedBlock) return;
+            if (type === 1) {
+                document.getElementById("hint-text").innerText = selectedBlock.hint;
+            } else if (type === 2) {
+                document.getElementById("block-image").src = selectedBlock.largeImage;
+            }
+        }
+
+        function giveUp() {
+            if (!selectedBlock) return;
+            document.getElementById("solution").style.display = "block";
+            document.getElementById("block-name").innerText = selectedBlock.name;
+            document.getElementById("full-image").src = selectedBlock.fullImage;
+            document.getElementById("guess-input").value = "";
+        }
+
+        const datalist = document.getElementById("blocks");
+        Object.keys(blocksData).forEach(block => {
+            let option = document.createElement("option");
+            option.value = block;
+            datalist.appendChild(option);
+        });
+    </script>
+</body>
+</html>

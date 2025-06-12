@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name='description' content='Step-by-step LCM calculator using short division. Quickly find the least common multiple of two or more positive integers, with a clear visual division table and final result. | I Hate School. | Note: This webpage is not character enhancement. I am not hard-working. If that sentence makes you feel less shameful for not learning how to make webpages.'>
+  <meta name="keywords" content="LCM calculator, least common multiple, short division method, math tool, step-by-step LCM">
+  <meta name="author" content="Porkifiable">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Find LCM of 2 or More Numbers – Short Division Method (Step-by-step)",
+      "operatingSystem": "All",
+      "url": "https://poipoipoipoipoipoipoipoipoi.github.io/bio/Find_LCM_of_2_or_More_Numbers_–_Short_Division_Method_(Step-by-step)/index.html",
+      "description": "Step-by-step LCM calculator using short division. Quickly find the least common multiple of two or more positive integers, with a clear visual division table and final result. | I Hate School. | Note: This webpage is not character enhancement. I am not hard-working. If that sentence makes you feel less shameful for not learning how to make webpages.",
+      "keywords": "LCM, least common multiple, short division, math calculator"
+    }
+  </script>
+  <title>Find LCM of 2 or More Numbers – Short Division Method (Step-by-step)</title>
+  <style>
+    body {
+      font-family: aptos, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    .back-link {
+      font-size: 1.2em;
+    }
+    h2 {
+      color: #28231f;
+    }
+    input {
+      width: 80%;
+      max-width: 1000px;
+      padding: 8px;
+      font-size: 1.5em;
+      text-align: center;
+    }
+    button {
+      width: 40%;
+      max-width: 500px;
+      padding: 8px;
+      font-size: 1.2em;
+      margin: 0 5px 0 0;
+    }
+    table {
+      font-size: 1.5em;
+      border-collapse: collapse;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #28231f;
+    }
+    th, td {
+      font-weight: normal;
+      padding: 8px 12px;
+      text-align: right;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.5em;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <p><a href="../index.html" target="_blank" class="back-link">← Back</a></p>
+  <h1>Find LCM of 2 or More Numbers</h1>
+  <h2>Short Division Method (Step-by-step)</h2>
+  <p>Enter positive integers separated by commas (e.g. 12,18,24):</p>
+  <p><input type="text" id="numbers" placeholder="12,18,24" /></p>
+  <p>
+    <button onclick="calculateLCM()">Calculate</button>
+    <button id="copyBtn" onclick="copyResult()" disabled>Copy result</button>
+  </p>
+
+  <div id="tableContainer"></div>
+  <div class="result" id="result"></div>
+
+  <script>
+    function gcd(a, b) {
+      while (b !== 0) [a, b] = [b, a % b];
+      return a;
+    }
+
+    function allPairwiseCoprime(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+          if (gcd(arr[i], arr[j]) !== 1) return false;
+        }
+      }
+      return true;
+    }
+
+    function calculateLCM() {
+      const input = document.getElementById("numbers").value.trim();
+      const tableDiv = document.getElementById("tableContainer");
+      const resultDiv = document.getElementById("result");
+      const copyBtn = document.getElementById("copyBtn");
+      tableDiv.innerHTML = "";
+      resultDiv.innerHTML = "";
+      copyBtn.disabled = true;
+
+      let numbers = input.split(",").map(n => parseInt(n.trim())).filter(n => !isNaN(n) && n > 0);
+      if (numbers.length < 2) {
+        tableDiv.innerHTML = '<p class="error">Please enter at least two positive integers.</p>';
+        return;
+      }
+
+      const originalNumbers = [...numbers];
+      let factor = 2;
+      let tableRows = [];
+      let factorList = [];
+
+      while (!allPairwiseCoprime(numbers)) {
+        let divisibleCount = numbers.filter(n => n % factor === 0).length;
+        if (divisibleCount >= 2) {
+          let newRow = [factor];
+          numbers = numbers.map(n => {
+            let result = n % factor === 0 ? n / factor : n;
+            newRow.push(result);
+            return result;
+          });
+          tableRows.push(newRow);
+          factorList.push(factor);
+        } else {
+          factor++;
+        }
+      }
+
+      // Create table
+      const table = document.createElement("table");
+      // Header row
+      const headerRow = document.createElement("tr");
+      const thFactor = document.createElement("th");
+      thFactor.textContent = "Factor";
+      headerRow.appendChild(thFactor);
+      originalNumbers.forEach((num, idx) => {
+        const th = document.createElement("th");
+        const nextFactor = factorList[0];
+        if (nextFactor && num % nextFactor === 0) {
+          th.innerHTML = `<strong>${num}</strong>`;
+        } else {
+          th.textContent = num;
+        }
+        headerRow.appendChild(th);
+      });
+      table.appendChild(headerRow);
+
+      // Data rows
+      tableRows.forEach((row, rowIndex) => {
+        const tr = document.createElement("tr");
+        const nextFactor = factorList[rowIndex + 1] || null;
+        row.forEach((cell, colIndex) => {
+          const td = document.createElement("td");
+          if (colIndex > 0 && nextFactor && cell % nextFactor === 0) {
+            td.innerHTML = `<strong>${cell}</strong>`;
+          } else {
+            td.textContent = cell;
+          }
+          tr.appendChild(td);
+        });
+        table.appendChild(tr);
+      });
+
+      tableDiv.appendChild(table);
+
+      // Compute LCM and show result
+      const remainingProduct = numbers.reduce((a, b) => a * b, 1);
+      const factorProduct = factorList.reduce((a, b) => a * b, 1);
+      const lcm = remainingProduct * factorProduct;
+      const allFactorsStr = [...factorList, ...numbers].join(' × ');
+      resultDiv.innerHTML = `LCM = ${allFactorsStr} = <strong>${lcm}</strong>`;
+      copyBtn.disabled = false;
+    }
+
+    function copyResult() {
+      const resultText = document.getElementById("result").innerText;
+      navigator.clipboard.writeText(resultText).then(() => {
+        const btn = document.getElementById("copyBtn");
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy result', 2000);
+      });
+    }
+  </script>
+</body>
+</html>

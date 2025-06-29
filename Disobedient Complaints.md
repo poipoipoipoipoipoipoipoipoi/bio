@@ -2130,6 +2130,8 @@ As a rebellious teenager, seeing this phenomenon, I naturally hope that people w
 
 ## Words 2
 
+![Words 2](https://poipoipoipoipoipoipoipoipoi.github.io/bio/Words%202.jpg)
+
 Even if it is a matter of life and death, I choose not to maintain such a culture, just for the sake of the least number of deaths.
 
 ## Words 3

@@ -1,8 +1,15 @@
 site_name: Disobedient Complaints
 theme: windmill
+repo_url: "https://poipoipoipoipoipoipoipoipoi.github.io/bio/"
+repo_name: Back
+site_description: "I HATE school (This book is an early learning children's book.) | Note: This book is not character enhancement. I don't read much. If that sentence makes you feel less shameful about not reading books. | Some free and up-to-date content of this booklet can be found on Medium https://medium.com/@porkifiableoinking and OneDrive https://1drv.ms/f/s!AoS3CwuJesEcjGGxQgc2T_GJ55el | A free version of this booklet can be found at https://poipoipoipoipoipoipoipoipoi.github.io/bio"
+site_author: Porkifiable
+plugins:
+  - search:
+      min_search_length: 1
 nav:
   - Friend Me: index.md
-  - This work is openly licensed via CC BY-ND 4.0..md
+  - "This work is openly licensed via CC BY-ND 4.0..md"
   - Shame and Rebelliousness.md
   - He Kidnapped Himself.md
   - A Very Detailed Dream.md

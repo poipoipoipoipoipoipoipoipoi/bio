@@ -9,7 +9,7 @@ plugins:
       min_search_length: 1
 nav:
   - Friend Me: index.md
-  - This work is openly licensed via CC BY-ND 4.0..md
+  - This work is openly licensed via CC BY-ND 4.0.: This work is openly licensed via CC BY-ND 4.0..md
   - Shame and Rebelliousness.md
   - He Kidnapped Himself.md
   - A Very Detailed Dream.md

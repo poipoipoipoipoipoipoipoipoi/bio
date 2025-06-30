@@ -1,0 +1,43 @@
+## en
+
+I dreamed that I was going somewhere, so I took a bus. When I got on the bus, I noticed another bus behind us, and it seemed to have more people inside. Our bus arrived at a station, stopped for a while, and then went to the next station. On the way, the driver, for some reason of his own, asked the passengers to get off the bus early. No one among the passengers was angry, and I wasn’t angry either, but I was slightly tense about the possible anger from others.
+
+We walked back to the previous station. The road was almost straight, and though it took some time, the distance didn’t feel as long as it did on the bus. The sky was cloudy and somewhat gray, probably because it was evening. We passed some buildings, and the concrete surfaces of the buildings were covered with gray paint and bricks. Along the street, there were some messy small shops with brown dirt hanging from the signs.
+
+We waited for a while near the station, and the passengers were walking around. Another bus came, but it was very crowded, and I suspected that it was the bus I had seen earlier. I remarked to two people about how crowded that bus was, some people got off, and the bus left. Most of the passengers left, leaving only the two young men, both slightly overweight. I remember one was wearing a brown coat, unbuttoned, with a gray, warm sweater underneath. The other person was wearing black clothes.
+
+I noticed that the clouds were gray, but not dark enough to signal rain. There was a winding river nearby, and we were actually on a high riverbank, but the road had guardrails on both sides, like a bridge, except that the slope on the other side was just dirt. On the water side, the slope was covered with black square tiles, each tile having a square hole in the middle. The black, slightly smooth surface of the tiles shimmered with the light from the water on top.
+
+I felt as if I was trying to hide something, though I didn’t know exactly what. So I glanced around slightly, but since there was no one else except the two men, I relaxed. The person in black clothes seemed to have walked onto the black tiles from somewhere, then somehow came back and started talking to the other person. They talked about one of them running away from home, and from their conversation, I realized that the other person had also run away from home, and the one wearing the brown coat seemed to have left that morning.
+
+I immediately decided to stay with them, no matter where they went. I moved closer and listened carefully, and they seemed to notice I was listening. Their tone about running away seemed somewhat excited. I realized that, since no one else was around, no one would find out about what they were discussing. I also heard them strongly emphasizing to themselves that they didn’t want to seriously meet the study requirements.
+
+They continued talking, and I realized they knew each other, but only met every few days. I started talking to them, telling them that I noticed the sadness they felt about life, their slight fear of running away, and the self-dissolution of guilt in their tone, and I introduced myself. We talked, and they sat leaning together, and I sat near the middle of them. From the conversation, I found out that the one in the brown coat was 16, and the other one was probably around the same age. I also told them my age.
+
+I wanted to help them, so I patted the person in the brown coat on the back of his shoulder, then gently pressed both of their backs with my palms. They seemed happy with my presence beside them. From their conversation, I also realized that we were in a town. At some point, the person in black clothes went back to the black tiles. I moved closer to the guardrail to look at the surroundings more carefully.
+
+There were green hills nearby, and between the water and the hills was a town with gray buildings, probably the one they had mentioned. On the other side of the hill was another similar town. The black protective slope was relatively gentle, and its bottom was far from the water, so there seemed to be no reason to worry about the person. The person in black walked up from a slightly lower point than the top of the protective slope, which was the height of the road, but still in the upper part of the slope.
+
+He asked me to listen to the sound of the water and said that there was a sound coming from the bottom of the water. We talked a bit about the sound, and then the person on the slope walked back to the lower-than-us, still higher part of the slope. I asked for their contact information, and the person in black came up and gave me a phone number, which seemed like a mobile number.
+
+At that point, the person in the brown coat had also walked down to the slope. After I wrote down the first number, I saw the person in the brown coat standing on the right side of the other person, and I asked for his contact information. He told me a shorter phone number, something like “1374625s.”
+
+## zh
+
+我梦到，我去一个什么地方，于是乘坐公交车。上车时，我注意到后面还有一辆车，里面似乎有更多的人。我们的公交车开到了一个站点，停了一会儿，又去下一个站点。在路上，司机出于他自己的某种原因，要乘客提前下车。乘客中没有人生气，我也完全不生气，只是对别人可能的生气的表现微微紧张。
+
+我们走回上一个站点，路几乎是笔直的，花了一些时间，但路程没有在车上感觉驶过的那么长。天空多云，有些灰暗，大概是因为这是傍晚。路过一些楼房，楼房的混凝土的表面分布着灰色的漆和砖。临街有一些不整洁的、牌子上挂了棕色的土的小商铺。
+
+我们在站点附近等了一会儿，乘客四处走动。又来了一辆车，但是挤得很满，我怀疑那是我一开始看到的那辆车。我冲着两个人感叹了一句那辆车的拥挤，那辆车下来几个人，又开走了。多数乘客离开了，只剩下那两个男的，都很年轻，都微微有点胖。我记得一个人穿着棕色的大衣，敞着怀，里面是一件厚实的灰色毛衣。另一个人穿着黑色的衣服。
+
+我注意到，云也是灰色的，但不黑到要下雨的程度。附近有一条弯弯的河，我们实际上是在河岸的高处，不过路的两侧都有栏杆，像一座桥一样，只不过另一边的坡下只是土。在水的一侧，斜坡护提上铺着黑色的方砖，每块砖中间有一个方洞，砖的黑色顶面有点光滑，上面闪着水光。
+
+我仿佛怕被人发现什么一样——虽然我也不知道到底是什么——于是我微微地、不完全地环顾四周，除了他们两个没有什么人，于是不紧张了。穿着黑色衣服的那个人，不知从何处走到了黑色的砖上，又不知怎的回来了，和另一个人交谈。他们谈到，他们中的一个人在离家出走，我又通过他们的对话意识到另一个人也在离家出走，并且那个穿着棕色大衣的人似乎今天早晨才离开家。
+
+我立即决定和他们留在一起，无论他们去哪儿。我靠近，仔细地听，他们好像意识到了我在听。他们谈论离家出走的语气似乎有些兴奋。我意识到，由于四周无人，不会有别人发现他们在谈论的事。此外，我听到了他们向他们自己强调他们不愿认真满足学习的规定的话。
+
+他们继续交谈，我意识到他们彼此认识，但隔几天才相见。我开始和他们谈论，告诉他们我注意到他们对生活感到的悲伤，以及他们对离家出走的微微害怕，还有在语气中流露的对自责的自我疏解，并自我介绍。我们谈论，他们坐着靠在一起，我靠近着他们俩的中间。我从谈论中知道，那个穿着棕色衣服的人16岁，另一个人似乎大概也是相同的年龄，我也告诉他们我有多大。
+
+我有点想帮他们，拍了拍穿着棕色衣服的人的后背肩膀处，后来用手掌同时轻按着他们两个人的后背，他们对我在旁边的存在似乎有些高兴。我还从他们的谈论中意识到，我们在一个城镇里。不知什么时候，那个穿着黑色衣服的人又去到黑色的砖上，我靠近栏杆，对周围的地貌看得更仔细些。
+
+附近有绿色的小山，水和山之间是一个城镇，能看到灰色的楼房，或许就是他们提到的那个城镇。小山的那边是另一个这样的城镇。那黑色的护坡比较平缓，它的底部离水也有距离，似乎没什么可担心那个人的。那个穿着黑色衣服的人从比堤的顶面也就是路的高度稍微低，但仍然在护坡的上半部分的地方走上来，要我听水声，说能听到某种声音，他说那是在水底发出的。我们谈论了几句这种声音，那个在护坡上的人又走下到护坡的靠上的位置。我管他们要联系方式，那个穿黑色衣服的人走了上来，告诉我一个似乎是手机号码的电话号，此时那个穿着棕色大衣的人也走到了坡上。记完了第一个电话号，我看到穿着棕色大衣的人在另一个人的右边，也管他要联系方式，他向我说了一个比第一个人更短的电话号，好像是“1374625s”。
